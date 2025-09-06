@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hovering Navigation Bar</title>
-  <!-- Load jQuery for the JavaScript functionality -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- Load Tailwind CSS for styling -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -27,32 +25,28 @@
       font-family: 'Inter', sans-serif;
     }
 
-    /* Fixed the typo from 'tranform' to 'transform' for smooth transitions */
     .hoverable {
       display: inline-block;
-      backface-visibility: hidden;
       vertical-align: middle;
       position: relative;
-      box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-      transform: translateZ(0);
-      transition-duration: .3s;
-      transition-property: transform;
+      /* Smooth transition for the 'transform' property on hover */
+      transition: transform 0.3s ease-in-out;
+      color: #443450; /* Set the text color here */
     }
 
     .hoverable:before {
+      content: '';
       position: absolute;
       pointer-events: none;
       z-index: -1;
-      content: '';
       top: 100%;
       left: 5%;
       height: 10px;
       width: 90%;
       opacity: 0;
-      background: -webkit-radial-gradient(center, ellipse, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
       background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 80%);
-      transition-duration: 0.3s;
-      transition-property: transform, opacity;
+      /* Smooth transition for the shadow's movement and opacity */
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     }
 
     .hoverable:hover, .hoverable:active, .hoverable:focus {
@@ -63,44 +57,6 @@
       opacity: 1;
       transform: translateY(-5px);
     }
-
-    @keyframes bounce-animation {
-      16.65% {
-        -webkit-transform: translateY(8px);
-        transform: translateY(8px);
-      }
-      33.3% {
-        -webkit-transform: translateY(-6px);
-        transform: translateY(-6px);
-      }
-      49.95% {
-        -webkit-transform: translateY(4px);
-        transform: translateY(4px);
-      }
-      66.6% {
-        -webkit-transform: translateY(-2px);
-        transform: translateY(-2px);
-      }
-      83.25% {
-        -webkit-transform: translateY(1px);
-        transform: translateY(1px);
-      }
-      100% {
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
-      }
-    }
-
-    .bounce {
-      animation-name: bounce-animation;
-      animation-duration: 2s;
-    }
-
-    /* Custom styles for the navigation links to apply the new color */
-    .nav-link {
-      color: #443450 !important;
-      transition: .5s color ease-in-out;
-    }
   </style>
 </head>
 <body class="bg-white font-sans">
@@ -109,10 +65,10 @@
   <nav class="fixed top-0 left-0 right-0 bg-white p-4 shadow-lg z-50 rounded-lg">
     <div class="container mx-auto flex justify-center">
       <ul class="flex space-x-12">
-        <li><a id="len1" class="hoverable nav-link" href="#">Home</a></li>
-        <li><a id="len2" class="hoverable nav-link" href="#">About</a></li>
-        <li><a id="len3" class="hoverable nav-link" href="#">Portfolio</a></li>
-        <li><a id="len4" class="hoverable nav-link" href="#">Contact</a></li>
+        <li><a id="len1" class="hoverable" href="#">About the Event</a></li>
+        <li><a id="len2" class="hoverable" href="#">Full Program</a></li>
+        <li><a id="len3" class="hoverable" href="#">Abstracts & Bios</a></li>
+        <li><a id="len4" class="hoverable" href="#">Contact</a></li>
       </ul>
     </div>
   </nav>
@@ -121,28 +77,11 @@
   <div class="pt-24">
     <!-- Display the large image here. Replace the placeholder URL with your poster.jpg -->
     <img
-      src="poster.jpg"
+      src="https://placehold.co/3508x4961/f0f0f0/333333?text=poster.jpg"
       alt="A large poster"
       class="w-full h-auto block rounded-lg shadow-xl"
     >
   </div>
-
-  <script>
-    // This script handles the bounce animation on the navigation links
-    $(function() {
-      var str = '#len';
-      $(document).ready(function() {
-        var i = 1;
-        var stop = 4; // num elements
-        setInterval(function() {
-          if (i > stop) {
-            return;
-          }
-          $('#len' + (i++)).toggleClass('bounce');
-        }, 500);
-      });
-    });
-  </script>
 
 </body>
 </html>
